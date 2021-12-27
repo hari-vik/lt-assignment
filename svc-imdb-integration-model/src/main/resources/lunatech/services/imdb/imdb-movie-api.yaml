@@ -1,0 +1,219 @@
+openapi: 3.0.0
+info:
+  title: IMDB Integration API
+  description: API to fetch information from IMDB Datasource
+  version: '1.0'
+servers:
+  - url: 'http://localhost:8080/rest/integration/imdb/v1'
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+paths:
+  /movies/title:
+    get:
+      tags:
+        - IMDB
+      operationId: searchMovie
+      summary: Operation to search movies by title
+      parameters:
+        - in: header
+          name: x-request-id
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: x-application-source
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: title
+          description: Primary title or the original title of the movie to be searched. Case insensitive and pattern matched search.
+          schema:
+            type: string
+          required: true
+     
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovieInfo'
+        
+        '204':
+          description: No matching content to return. 
+        
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+  /movies/rating:
+    get:
+      tags:
+        - IMDB
+      operationId: topRatedMovies
+      summary: Operation to fetch top rated movies by genre
+      parameters:
+        - in: header
+          name: x-request-id
+          schema:
+            type: string
+          required: true
+        - in: header
+          name: x-application-source
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: genre
+          description: Genre of the movie to be search
+          schema:
+            type: string
+            enum: [Film-Noir, Action, War, History, Western, Documentary, Sport, Thriller, News, Biography, Adult, Comedy, Mystery, Musical, Short, Talk-Show, Adventure, Horror, Romance, Sci-Fi, Drama, Music, Game-Show, Crime, Fantasy, Animation, Family, Reality-TV]
+          required: true
+        - in: query
+          name: perPage
+          description: Limit the number of movies to be returned in response
+          schema:
+            type: integer
+            default: 50
+          required: false
+        - in: query
+          name: page
+          description: Pagination number
+          schema:
+            type: integer
+            default: 0
+          required: false
+        - in: query
+          name: crewAndCastInfo
+          description: Flag which determines whether crew and cast details required in response. If "true", movie info will contain cast and crew details.
+          schema:
+            type: boolean
+            default: false
+          required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovieInfo'
+        '204':
+          description: No matching genre to return.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+components:
+  schemas:
+    MovieInfo:
+      properties:
+        id:
+          type: string
+          description:  alphanumeric unique identifier of the title
+        titleType:
+          type: string
+          description: the type/format of the title (e.g. movie, short, tvseries, tvepisode, video, etc)
+        primaryTitle:
+          type: string
+          description: the more popular title / the title used by the filmmakers on promotional materials at the point of release
+        originalTitle:
+          type: string
+          description: original title, in the original language
+        isAdult:
+          type: boolean
+          description: 'false: non-adult title; true: adult title'
+        startYear:
+          type: string
+          description: represents the release year of a title. In the case of TV Series, it is the series start year (YYYY)
+        endYear:
+          type: string
+          description: TV Series end year.
+        runTimeMinutes:
+          type: string
+          description:  primary runtime of the title, in minutes
+        genres:
+          type: string
+        averageRating:
+          type: number
+        numberOfVotes:
+          type: number
+        cast:
+          type: array
+          items:
+            $ref: "#/components/schemas/Cast"
+        crew:
+          type: array
+          items:
+            $ref: "#/components/schemas/Crew"
+    Cast:
+      allOf:
+        - $ref: '#/components/schemas/PersonInfo'
+        - type: object
+          properties:
+            category:
+              type: string
+            job:
+              type: string
+            characters:
+              type: string
+    Crew:
+      allOf:
+        - $ref: '#/components/schemas/PersonInfo'
+    PersonInfo:
+      properties:
+        primaryName:
+          type: string
+        birthYear:
+          type: string
+        deathYear:
+          type: string
+        primaryProfession:
+          type: string
+    ApplicationError:
+      properties:
+        contextName:
+          type: string
+        exceptionName:
+          type: string
+        errorCode:
+          type: string
+        errorMessage:
+          type: string

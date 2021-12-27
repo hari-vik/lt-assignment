@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "d1ec9003-4bc3-4685-99be-aac7a7023c92",
+		"name": "Lunatech_Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "GetMovieByTitle",
+					"item": [
+						{
+							"name": "TEST_TITLE: By Original Title",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "5fef6d16-6746-11ec-90d6-0242ac120003",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/rest/integration/imdb/v1/movies/title?title=baignade en mer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest",
+										"integration",
+										"imdb",
+										"v1",
+										"movies",
+										"title"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "baignade en mer"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TEST_TITLE : Same primary and original title Copy",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "5fef6d16-6746-11ec-90d6-0242ac120003",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/rest/integration/imdb/v1/movies/title?title=Carmencita",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest",
+										"integration",
+										"imdb",
+										"v1",
+										"movies",
+										"title"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "Carmencita"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TEST_CREW : Both Director and Writer",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "5fef6d16-6746-11ec-90d6-0242ac120003",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/rest/integration/imdb/v1/movies/title?title=Exit of Rip and the Dwarf",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest",
+										"integration",
+										"imdb",
+										"v1",
+										"movies",
+										"title"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "Exit of Rip and the Dwarf"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TEST_TITLE: No movie name match",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "5fef6d16-6746-11ec-90d6-0242ac120003",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/rest/integration/imdb/v1/movies/title?title=NoSuchMovie",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest",
+										"integration",
+										"imdb",
+										"v1",
+										"movies",
+										"title"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "NoSuchMovie"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TopRatedByGenre",
+					"item": [
+						{
+							"name": "TEST_Genre : Basic",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "5fef6d16-6746-11ec-90d6-0242ac120003",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/rest/integration/imdb/v1/movies/rating?genre=Crime",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest",
+										"integration",
+										"imdb",
+										"v1",
+										"movies",
+										"rating"
+									],
+									"query": [
+										{
+											"key": "genre",
+											"value": "Crime"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TEST_Genre : Invalid Genre",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "5fef6d16-6746-11ec-90d6-0242ac120003",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/rest/integration/imdb/v1/movies/rating?genre=TimeLoop",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest",
+										"integration",
+										"imdb",
+										"v1",
+										"movies",
+										"rating"
+									],
+									"query": [
+										{
+											"key": "genre",
+											"value": "TimeLoop"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TEST_Genre : With Limit Filter",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "5fef6d16-6746-11ec-90d6-0242ac120003",
+										"type": "text"
+									},
+									{
+										"key": "Correlation-Id",
+										"value": "Trackeing",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/rest/integration/imdb/v1/movies/rating?genre=Horror&perPage=3&page=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest",
+										"integration",
+										"imdb",
+										"v1",
+										"movies",
+										"rating"
+									],
+									"query": [
+										{
+											"key": "genre",
+											"value": "Horror"
+										},
+										{
+											"key": "perPage",
+											"value": "3"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TEST_Genre : With CastCrew Filter",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-request-id",
+										"value": "5fef6d16-6746-11ec-90d6-0242ac120003",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/rest/integration/imdb/v1/movies/rating?genre=Horror&perPage=2&page=0&crewAndCastInfo=true",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rest",
+										"integration",
+										"imdb",
+										"v1",
+										"movies",
+										"rating"
+									],
+									"query": [
+										{
+											"key": "genre",
+											"value": "Horror"
+										},
+										{
+											"key": "perPage",
+											"value": "2"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "crewAndCastInfo",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,20 @@
+spring:
+  main:
+    banner-mode: "off"
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  application:
+    name: integration
+service:
+  config:
+    basepath: /rest/integration/imdb
+logbook:
+  exclude:
+    - /actuator/**
+  filter.enabled: true
+  secure-filter.enabled: true
+  format.style: http
+  obfuscate:
+    headers:
+      - Authorization

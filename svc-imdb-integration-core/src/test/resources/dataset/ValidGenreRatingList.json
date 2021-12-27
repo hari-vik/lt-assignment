@@ -1,0 +1,26 @@
+[
+    {
+        "id": "tt13747894",
+        "titleType": "short",
+        "primaryTitle": "Shadow of the plague doctor",
+        "originalTitle": "Shadow of the plague doctor",
+        "isAdult": false,
+        "startYear": "2020",
+        "runTimeMinutes": "5",
+        "genres": "Drama,Fantasy,Horror",
+        "averageRating": 10.0,
+        "numberOfVotes": 19
+    },
+    {
+        "id": "tt13727262",
+        "titleType": "short",
+        "primaryTitle": "Electric shark",
+        "originalTitle": "Electric shark",
+        "isAdult": false,
+        "startYear": "2020",
+        "runTimeMinutes": "6",
+        "genres": "Action,Comedy,Horror",
+        "averageRating": 10.0,
+        "numberOfVotes": 18
+    }
+]

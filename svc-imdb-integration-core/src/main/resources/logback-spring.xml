@@ -1,0 +1,66 @@
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <property name="LOG_ROLLING-FILE" value="${LOG_ROLLING-FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/server.log}" />
+    <property name="LOG_ARCHIVE-FILE" value="${LOG_ARCHIVE-FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/server.log.%d{yyyy-MM-dd}.%i}.gz" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%date{ISO8601} %-5level [%logger{36}] x-request-id=%X{x-request-id} [%thread] %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ROLLING-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_ROLLING-FILE}</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%date{ISO8601} %-5level [%logger{36}] x-request-id=%X{x-request-id} [%thread] %msg%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_ARCHIVE-FILE}</fileNamePattern>
+            <maxHistory>180</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>1GB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="imdb" level="INFO" />
+
+    <logger name="org.springframework" level="INFO" />
+
+    <logger name="org.springframework.ws" level="INFO" />
+    <logger name="org.springframework.security" level="INFO" />
+
+    <logger name="org.springframework.ws.server.MessageTracing" level="INFO" />
+    <logger name="org.springframework.ws.client.MessageTracing" level="INFO" />
+
+    <logger name="org.springframework.web.client.MessageTracing" level="INFO" />
+
+    <logger name="spring.web.client.MessageTracing.sent" level="INFO" />
+    <logger name="spring.web.client.MessageTracing.received" level="INFO" />
+
+    <logger name="org.zalando.logbook.Logbook" level="TRACE" />
+
+    <logger name="com.zaxxer.hikari" level="INFO" />
+    <logger name="org.hibernate.SQL" level="INFO" />
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="INFO" />
+
+    <springProfile name="l2stdout">
+        <root level="INFO">
+            <appender-ref ref="STDOUT" />
+        </root>
+    </springProfile>
+
+    <springProfile name="l2file">
+        <root level="INFO">
+            <appender-ref ref="ROLLING-FILE" />
+        </root>
+    </springProfile>
+    
+         <root level="INFO">
+            <appender-ref ref="STDOUT" />
+     </root>
+    
+
+</configuration>

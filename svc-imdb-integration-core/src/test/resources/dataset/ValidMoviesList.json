@@ -1,0 +1,88 @@
+[
+    {
+        "id": "tt0221814",
+        "titleType": "short",
+        "primaryTitle": "Baignade en mer",
+        "originalTitle": "Baignade en mer",
+        "isAdult": false,
+        "startYear": "1897",
+        "genres": "Short",
+        "averageRating": 5.3,
+        "numberOfVotes": 76,
+        "cast": [
+            {
+                "primaryName": "Louis Lumière",
+                "birthYear": "1864",
+                "deathYear": "1948",
+                "primaryProfession": "producer,director,cinematographer",
+                "category": "director"
+            }
+        ],
+        "crew": [
+            {
+                "primaryName": "Louis Lumière",
+                "birthYear": "1864",
+                "deathYear": "1948",
+                "primaryProfession": "producer,director,cinematographer"
+            }
+        ]
+    },
+    {
+        "id": "tt0000023",
+        "titleType": "short",
+        "primaryTitle": "The Sea",
+        "originalTitle": "Baignade en mer",
+        "isAdult": false,
+        "startYear": "1895",
+        "runTimeMinutes": "1",
+        "genres": "Documentary,Short",
+        "averageRating": 5.7,
+        "numberOfVotes": 1169,
+        "cast": [
+            {
+                "primaryName": "Louis Lumière",
+                "birthYear": "1864",
+                "deathYear": "1948",
+                "primaryProfession": "producer,director,cinematographer",
+                "category": "director"
+            }
+        ],
+        "crew": [
+            {
+                "primaryName": "Louis Lumière",
+                "birthYear": "1864",
+                "deathYear": "1948",
+                "primaryProfession": "producer,director,cinematographer"
+            }
+        ]
+    },
+    {
+        "id": "tt0000037",
+        "titleType": "short",
+        "primaryTitle": "Sea Bathing",
+        "originalTitle": "Baignade en mer",
+        "isAdult": false,
+        "startYear": "1896",
+        "runTimeMinutes": "1",
+        "genres": "Short",
+        "averageRating": 4.6,
+        "numberOfVotes": 42,
+        "cast": [
+            {
+                "primaryName": "Georges Méliès",
+                "birthYear": "1861",
+                "deathYear": "1938",
+                "primaryProfession": "director,actor,producer",
+                "category": "director"
+            }
+        ],
+        "crew": [
+            {
+                "primaryName": "Georges Méliès",
+                "birthYear": "1861",
+                "deathYear": "1938",
+                "primaryProfession": "director,actor,producer"
+            }
+        ]
+    }
+]

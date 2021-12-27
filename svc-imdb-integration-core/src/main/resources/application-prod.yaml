@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  use-forwarded-headers: true
+
+spring:
+  jpa:
+    show-sql: false
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/lunatech_imdb
+    hikari:
+       connectionTimeout=2000
+       maximumPoolSize=5
+  application:
+    name: integration
+  jackson:
+    default-property-inclusion: NON_NULL
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+    password: admin
+
+logging:
+  level:
+    root: INFO
+        

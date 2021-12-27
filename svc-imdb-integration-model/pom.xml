@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>svc-imdb-integration-model</artifactId>
+	<packaging>jar</packaging>
+
+	<name>IMDB integration API Design Module</name>
+	<description>Project to hold the API design</description>
+
+	<parent>
+		<groupId>org.lunatech.api</groupId>
+		<artifactId>svc-imdb-integration</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../</relativePath>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>openapi-generator</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<configuration>
+					<generatorName>spring</generatorName>
+					<generateSupportingFiles>true</generateSupportingFiles>
+					<configOptions>
+						<enableBuilderSupport>true</enableBuilderSupport>
+						<interfaceOnly>true</interfaceOnly>
+						<dateLibrary>java8</dateLibrary>
+						<java8>true</java8>
+						<serializableModel>true</serializableModel>
+						<delegatePattern>true</delegatePattern>
+						<useBeanValidation>true</useBeanValidation>
+						<hideGenerationTimestamp>true</hideGenerationTimestamp>
+						<simpleFluentPattern>true</simpleFluentPattern>
+						<collectionFluentPattern>true</collectionFluentPattern>
+					</configOptions>
+				</configuration>
+				<executions>
+
+					<execution>
+						<id>imdb</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/lunatech/services/imdb/imdb-movie-api.yaml</inputSpec>
+							<apiPackage>lunatech.services.controller.imdb</apiPackage>
+							<modelPackage>lunatech.services.model.imdb</modelPackage>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-cli</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target name="delete files">
+								<delete>
+									<fileset
+										dir="${project.build.directory}/generated-sources/openapi"
+										includes="**/*.md, **/*.xml" />
+								</delete>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-client-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/openapi/src/main/java</source>
+								<source>${project.build.directory}/generated-sources/annotations</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
+						</path>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
