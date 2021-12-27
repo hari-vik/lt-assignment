@@ -20,7 +20,7 @@ import lunatech.services.model.imdb.MovieInfo;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ControllerIntegrationTest {
+class ControllerIntegrationTest {
 	@Autowired
 	private TestRestTemplate restTemplate;
 	private static final String BASE_PATH = "/rest/integration/imdb/v1";
@@ -45,8 +45,8 @@ public class ControllerIntegrationTest {
 		assertThat(movieList.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(movieList.getBody()).hasSize(2);
 		assertThat(movieList.getBody().get(0).getPrimaryTitle()).isEqualTo("Carmencita");
-		assertThat(movieList.getBody().get(0).getCrew()).hasSize(0);
-		assertThat(movieList.getBody().get(0).getCast()).hasSize(0);
+		assertThat(movieList.getBody().get(0).getCrew()).isEmpty();
+		assertThat(movieList.getBody().get(0).getCast()).isEmpty();
 		assertThat(movieList.getBody().get(1).getCrew()).hasSize(1);
 		assertThat(movieList.getBody().get(1).getCast()).hasSize(2);
 	}

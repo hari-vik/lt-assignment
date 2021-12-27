@@ -17,12 +17,12 @@ import lombok.extern.slf4j.Slf4j;
 import lunatech.services.imdb.exception.ExceptionEnum;
 import lunatech.services.imdb.exception.ServiceProcessingException;
 import lunatech.services.model.imdb.ApplicationError;
+import static lunatech.services.imdb.utils.ApiConstants.LOG_ERR_PLACEHOLDER;
 
 /**
- * Class to handle exceptions across project.
- *  1) Spring Validation Exception
- *  2) Project specific exceptions {@link ServiceProcessingException}
- *  3) Generic Exception
+ * Class to handle exceptions across project. 1) Spring Validation Exception 2)
+ * Project specific exceptions {@link ServiceProcessingException} 3) Generic
+ * Exception
  * 
  * @author hari
  *
@@ -31,10 +31,10 @@ import lunatech.services.model.imdb.ApplicationError;
 @Slf4j
 @ControllerAdvice(value = "lunatech.services.imdb")
 public class ControllerExceptionHandler {
-	
-	
+
 	@Autowired
 	HttpServletRequest request;
+
 	/**
 	 * Handler for invalid input fields
 	 *
@@ -45,9 +45,9 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
 	private ApplicationError handleMissingInputInBody(Exception ex) {
-		
-		log.error("RequestId {} failed with message {}", getRequestId(), ex.getMessage());
-		
+
+		log.error(LOG_ERR_PLACEHOLDER, getRequestId(), ex.getMessage());
+
 		return errorBuilder(ExceptionEnum.INVALID_INPUT.findErrorCode(),
 				ExceptionEnum.INVALID_INPUT.findErrorMessage());
 	}
@@ -62,16 +62,16 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
 	private ApplicationError handleMissingHeader(MissingRequestHeaderException ex) {
-		log.error("RequestId {} missing header {}", getRequestId(), ex.getMessage());
+		log.error(LOG_ERR_PLACEHOLDER, getRequestId(), ex.getMessage());
 		return errorBuilder(ExceptionEnum.MISSING_HEADER.findErrorCode(),
 				ExceptionEnum.MISSING_HEADER.findErrorMessage().concat(ex.getHeaderName()));
 	}
-	
+
 	@ExceptionHandler(MissingServletRequestParameterException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
 	private ApplicationError handleMissingInput(MissingServletRequestParameterException ex) {
-		log.error("RequestId {} failed with message {}", getRequestId(), ex.getMessage());
+		log.error(LOG_ERR_PLACEHOLDER, getRequestId(), ex.getMessage());
 		return errorBuilder(ExceptionEnum.MISSING_FIELD.findErrorCode(),
 				ExceptionEnum.MISSING_FIELD.findErrorMessage());
 	}
@@ -86,9 +86,8 @@ public class ControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
 	private ApplicationError handleGenericException(Exception ex) {
-		log.error("RequestId {} failed with message {}", getRequestId(), ex.getMessage());
-		return errorBuilder(ExceptionEnum.EX_GENERAL.findErrorCode(),
-				ExceptionEnum.EX_GENERAL.findErrorMessage());
+		log.error(LOG_ERR_PLACEHOLDER, getRequestId(), ex.getMessage());
+		return errorBuilder(ExceptionEnum.EX_GENERAL.findErrorCode(), ExceptionEnum.EX_GENERAL.findErrorMessage());
 
 	}
 
@@ -98,7 +97,7 @@ public class ControllerExceptionHandler {
 		applicationError.setErrorMessage(errMsg);
 		return applicationError;
 	}
-	
+
 	private String getRequestId() {
 		return request.getHeader("x-request-id");
 	}

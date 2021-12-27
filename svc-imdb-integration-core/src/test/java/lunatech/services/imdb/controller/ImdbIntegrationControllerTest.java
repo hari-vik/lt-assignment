@@ -36,7 +36,7 @@ import lunatech.services.model.imdb.MovieInfo;
 @ExtendWith(SpringExtension.class)
 @ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class))
 @WebMvcTest(controllers = ImdbIntegrationControllerImpl.class)
-public class ImdbIntegrationControllerTest {
+class ImdbIntegrationControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;

@@ -15,7 +15,7 @@ import org.springframework.test.context.jdbc.Sql;
 import lunatech.services.imdb.entity.TitleBasics;
 
 @DataJpaTest
-public class MovieRepositoryTest {
+class MovieRepositoryTest {
 
 	@Autowired
 	private MovieRepository movieRepository;
@@ -28,7 +28,7 @@ public class MovieRepositoryTest {
 
 		assertThat(moviesList).hasSize(2);
 		assertThat(moviesList.get(0).getTconst()).isEqualTo("tt0453643");
-		assertThat(moviesList.get(0).getTitlePrincipals()).hasSize(0);
+		assertThat(moviesList.get(0).getTitlePrincipals()).isEmpty();
 
 		assertThat(moviesList.get(1).getTconst()).isEqualTo("tt0000001");
 		assertThat(moviesList.get(1).getTitlePrincipals()).hasSize(2);

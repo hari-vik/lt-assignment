@@ -15,7 +15,7 @@ import lunatech.services.model.imdb.MovieInfo;
  *
  */
 @Mapper(nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS, uses = { CastMapper.class, CrewMapper.class}, componentModel = "spring")
-public abstract class MovieFullInfoMapper {
+public interface MovieFullInfoMapper {
 
 	@Mapping(source = "tconst", target = "id")
 	@Mapping(source = "titleRating.averagerating", target = "averageRating")

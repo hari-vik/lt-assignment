@@ -22,7 +22,7 @@ public class PrincipalServiceImpl implements PrincipalService {
 
 	@Override
 	public List<NameBasics> getCrewDetails(List<String> listOfId) {
-		return listOfId.isEmpty() ? new ArrayList<NameBasics>() : nameRepository.findAllById(listOfId);
+		return listOfId.isEmpty() ? new ArrayList<>() : nameRepository.findAllById(listOfId);
 	}
 
 }

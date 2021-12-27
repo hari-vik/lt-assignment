@@ -37,10 +37,10 @@ public class ImdbIntegrationControllerImpl implements MoviesApi {
 
 		if (null == movieInfo || movieInfo.isEmpty()) {
 			log.info("RequestId: {} : No movie information found for title {}", xRequestId, title);
-			return new ResponseEntity<List<MovieInfo>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
-		return new ResponseEntity<List<MovieInfo>>(movieInfo, HttpStatus.OK);
+		return new ResponseEntity<>(movieInfo, HttpStatus.OK);
 	}
 
 	@Override
@@ -51,10 +51,10 @@ public class ImdbIntegrationControllerImpl implements MoviesApi {
 
 		if (null == movieInfo || movieInfo.isEmpty()) {
 			log.info("RequestId: {} : No information found for genre {}", xRequestId, genre);
-			return new ResponseEntity<List<MovieInfo>>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 
-		return new ResponseEntity<List<MovieInfo>>(movieInfo, HttpStatus.OK);
+		return new ResponseEntity<>(movieInfo, HttpStatus.OK);
 	}
 
 	
